@@ -1,3 +1,13 @@
 #board {
   padding: 50px
 }
+
+.info {
+    width: 400px;
+    margin: auto;
+}
+
+.move-history {
+    max-height: 100px;
+    overflow-y: scroll;
+}

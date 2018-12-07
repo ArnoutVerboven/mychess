@@ -10,15 +10,19 @@ var onDragStart = function(source, piece, position, orientation) {
   }
 };
 
-var makeRandomMove = function() {
-  var possibleMoves = game.moves();
-
-  // game over
-  if (possibleMoves.length === 0) return;
-
-  var randomIndex = Math.floor(Math.random() * possibleMoves.length);
-  game.move(possibleMoves[randomIndex]);
+var makeEngineMove = function() {
+  //game over
+  if (game.moves().length === 0) {
+    alert('Game over');
+    return;
+  }
+  game.move(getBestMove(game));
   board.position(game.fen());
+  // renderMoveHistory(game.history());
+  if (game.game_over()) {
+        alert('Game over');
+    }
+
 };
 
 var onDrop = function(source, target) {
@@ -33,7 +37,7 @@ var onDrop = function(source, target) {
   if (move === null) return 'snapback';
 
   // make random legal move for black
-  window.setTimeout(makeRandomMove, 250);
+  window.setTimeout(makeEngineMove, 250);
 };
 
 // update the board position after the piece snap

@@ -4,14 +4,25 @@
     <link rel="stylesheet" href="releases/0.3.0/css/chessboard-0.3.0.min.css">
     <link rel="stylesheet" href="css/website.css">
     <link rel="stylesheet" href="styles/style.css">
-    <script src="js/chess-0.10.2.min.js"></script>
+    <!-- <script src="js/chess-0.10.2.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js"></script> -->
     <script src="releases/0.3.0/js/chessboard-0.3.0.min.js"></script>
+    <script src="js/chess.js"></script>
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/jquery.color-2.1.2.min.js"></script>
 </head>
 
 <body>
-    <div id="board" style="width: 400px" class=""></div>
-    <script type="text/javascript" src="scripts/main.js"></script>r
+    <div id="board" style="width: 400px"></div>
+    <div id="text" class="h2"></div>
+    <br>
+    <span>Positions evaluated: <span id="position-count"></span></span>
+    <br>
+    <span>Time: <span id="time"></span></span>
+    <br>
+    <span>Positions/s: <span id="positions-per-s"></span> </span>
+    <!-- <div id="move-history" class="move-history"></div> -->
+    <script type="text/javascript" src="scripts/main.js"></script>
+    <script type="text/javascript" src="scripts/alfa.js"></script>
 </body>
 </html>
