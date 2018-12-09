@@ -1,8 +1,10 @@
-const SEARCH_DEPTH = 4;
+const SEARCH_DEPTH = 1;
+const CAPTURE_DEPTH = 0;
 
 function minimaxRoot(depth, game, isMaximisingPlayer) {
     var moves = game.moves({ verbose: true });
-    var newGameMoves = optimalSort(moves);
+    // var newGameMoves = optimalSort(moves);
+    var newGameMove = moves;
 
     var bestMove = -9999;
     var bestMoveFound;
@@ -17,7 +19,7 @@ function minimaxRoot(depth, game, isMaximisingPlayer) {
             bestMoveFound = newGameMove;
         }
     }
-    console.log("Score: ",-bestMove/10);
+    console.log("Score: ",-bestMove/10, depth);
     return bestMoveFound;
 };
 
@@ -28,9 +30,16 @@ function minimax(depth, game, alpha, beta, isMaximisingPlayer) {
     if (depth === 0) {
         return -evaluateBoard(game);
     }
-
     var moves = game.moves({ verbose: true });
-    var newGameMoves = optimalSort(moves);
+    var newGameMoves;
+    // if (depth <= CAPTURE_DEPTH) {
+    //   newGameMoves = onlyCaptureMoves(moves);
+    //   if (newGameMoves.length === 0)
+    //     return -evaluateBoard(game);
+    // } else {
+    //   newGameMoves = optimalSort(moves);
+    // }
+    newGameMoves = moves;
 
     if (isMaximisingPlayer) {
         var bestMove = -9999;
@@ -64,11 +73,24 @@ function optimalSort(moves) {
   for (var i = 0; i<moves.length;i++){
     var move = moves[i];
     if (move['flag'] == undefined) {
+      console.log('w')
       res.push(move);
-    } else if ((move['flag'].indexOf('c') > -1) || (move[flag].indexOf('e') > -1)) {
-      console.log('k');
+    } else if ((move['flag'].indexOf('c') > -1) || (move['flag'].indexOf('e') > -1)) {
       res.unshift(move);
     } else {
+      res.push(move);
+    }
+  }
+  return res;
+}
+
+function onlyCaptureMoves(moves) {
+  var res = [];
+  for (var i = 0; i<moves.length;i++){
+    var move = moves[i];
+    console.log(move['flag']);
+    if ((move['flag'] == 'c') || (move['flag'] == 'e')) {
+      console.log('k');
       res.push(move);
     }
   }
