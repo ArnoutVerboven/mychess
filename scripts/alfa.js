@@ -1,10 +1,10 @@
-const SEARCH_DEPTH = 1;
-const CAPTURE_DEPTH = 0;
+const SEARCH_DEPTH = 3;
+// const CAPTURE_DEPTH = 1;
 
 function minimaxRoot(depth, game, isMaximisingPlayer) {
     var moves = game.moves({ verbose: true });
-    // var newGameMoves = optimalSort(moves);
-    var newGameMove = moves;
+    var newGameMoves = optimalSort(moves);
+    // var newGameMoves = moves;
 
     var bestMove = -9999;
     var bestMoveFound;
@@ -19,7 +19,7 @@ function minimaxRoot(depth, game, isMaximisingPlayer) {
             bestMoveFound = newGameMove;
         }
     }
-    console.log("Score: ",-bestMove/10, depth);
+    console.log("Score: ",-bestMove/10);
     return bestMoveFound;
 };
 
@@ -30,8 +30,8 @@ function minimax(depth, game, alpha, beta, isMaximisingPlayer) {
     if (depth === 0) {
         return -evaluateBoard(game);
     }
-    var moves = game.moves({ verbose: true });
-    var newGameMoves;
+    // var moves = game.moves({ verbose: true });
+    // var newGameMoves;
     // if (depth <= CAPTURE_DEPTH) {
     //   newGameMoves = onlyCaptureMoves(moves);
     //   if (newGameMoves.length === 0)
@@ -39,7 +39,7 @@ function minimax(depth, game, alpha, beta, isMaximisingPlayer) {
     // } else {
     //   newGameMoves = optimalSort(moves);
     // }
-    newGameMoves = moves;
+    var newGameMoves = game.moves();
 
     if (isMaximisingPlayer) {
         var bestMove = -9999;
@@ -72,10 +72,9 @@ function optimalSort(moves) {
   var res = [];
   for (var i = 0; i<moves.length;i++){
     var move = moves[i];
-    if (move['flag'] == undefined) {
-      console.log('w')
+    if (move['flags'] == undefined) {
       res.push(move);
-    } else if ((move['flag'].indexOf('c') > -1) || (move['flag'].indexOf('e') > -1)) {
+    } else if ((move['flags'].indexOf('c') > -1) || (move['flags'].indexOf('e') > -1)) {
       res.unshift(move);
     } else {
       res.push(move);
@@ -88,9 +87,7 @@ function onlyCaptureMoves(moves) {
   var res = [];
   for (var i = 0; i<moves.length;i++){
     var move = moves[i];
-    console.log(move['flag']);
-    if ((move['flag'] == 'c') || (move['flag'] == 'e')) {
-      console.log('k');
+    if ((move['flags'].indexOf('c') > -1) || (move['flags'].indexOf('e') > -1)) {
       res.push(move);
     }
   }
