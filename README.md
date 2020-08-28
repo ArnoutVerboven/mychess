@@ -2,7 +2,7 @@
 
 Basic chess AI in JS
 
-To run the app, you need to have node installed.
+To run the app, you need to have npm installed.
 
 Install dependencies:
 
