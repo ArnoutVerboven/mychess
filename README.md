@@ -15,4 +15,5 @@ Run app:
 ## Engine
 
 The engine can be found in scripts/alfa.js
+
 It is called in scripts/main.js as `getBestMove()`
