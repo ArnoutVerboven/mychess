@@ -10,7 +10,9 @@ Install dependencies:
 
 Run app:
 
-`node server.js`
+`node server.js` 
+
+and go to http://localhost:3000/
 
 ## Engine
 
